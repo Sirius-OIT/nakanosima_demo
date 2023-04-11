@@ -41,7 +41,7 @@ namespace nakanosima
             data.angular.y = 0.0;
             data.angular.z = 0.0;
         } else {
-            data.linear.x = 1.0;
+            data.linear.x = 0.1;
             data.linear.y = 0.0;
             data.linear.z = 0.0;
             data.angular.x = 0.0;
