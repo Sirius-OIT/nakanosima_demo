@@ -12,20 +12,25 @@ namespace nakanosima
 class Demo : public rclcpp::Node
 {
 public:
+    typedef struct
+    {
+        float position_x;
+        float position_y;
+        float orientation_z;
+    }GoalPose;
+
     explicit Demo(const rclcpp::NodeOptions & options);
     geometry_msgs::msg::Twist calcurate_velocity(float x, float y, GoalPose pose);
-    void callback();
+    void callback(const geometry_msgs::msg::PoseStamped::SharedPtr data);
+
+    virtual ~Demo();
 
 private:
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr signal_pub_;
     rclcpp::TimerBase::SharedPtr timer_;
     rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr current_pose_subscription_;
+    GoalPose pose;
+};
+}
 
-    typedef struct
-    {
-        position_x;
-        position_y;
-        orientation_z;
-    }GoalPose;
-}
-}
+#endif

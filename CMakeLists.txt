@@ -20,9 +20,9 @@ find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
 ament_auto_add_library(demo src/demo.cpp)
-rclcpp_components_register_nodes(demo "Demo::Demo")
+rclcpp_components_register_nodes(demo "nakanosima::Demo")
 
-ament_auto_add_executable(demo 
+ament_auto_add_executable(nakanosima_demo 
   src/demo_node.cpp
   src/demo.cpp)
 
