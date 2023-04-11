@@ -12,6 +12,7 @@ namespace nakanosima
         pose.position_x = 10.0;
         pose.position_y = 0.0;
         pose.orientation_z = 0.0;
+        pose.state = 0;
     }
 
     void Demo::callback(const geometry_msgs::msg::PoseStamped::SharedPtr data)
@@ -32,23 +33,83 @@ namespace nakanosima
         distance = std::sqrt(std::pow(x - pose.position_x, 2.0)+std::pow(y - pose.position_y, 2.0));
         RCLCPP_INFO(this->get_logger(), "distance : %f", distance);
         RCLCPP_INFO(this->get_logger(), "pose.position_x : %f", pose.position_x);
-
-        if(distance <= 1.0){
+        if(pose.state == 0){
+            if(distance <= 0.1){
+                data.linear.x = 0.0;
+                data.linear.y = 0.0;
+                data.linear.z = 0.0;
+                data.angular.x = 0.0;
+                data.angular.y = 0.0;
+                data.angular.z = 1.5;
+                pose.state++;
+            } else {
+                data.linear.x = 0.1;
+                data.linear.y = 0.0;
+                data.linear.z = 0.0;
+                data.angular.x = 0.0;
+                data.angular.y = 0.0;
+                data.angular.z = 0.0;
+            }
+        }
+        if(pose.state == 1){
+            if(distance <= 0.1){
+                data.linear.x = 0.0;
+                data.linear.y = 0.0;
+                data.linear.z = 0.0;
+                data.angular.x = 0.0;
+                data.angular.y = 0.0;
+                data.angular.z = 1.5;
+                pose.state++;
+            } else {
+                data.linear.x = 0.1;
+                data.linear.y = 0.0;
+                data.linear.z = 0.0;
+                data.angular.x = 0.0;
+                data.angular.y = 0.0;
+                data.angular.z = 0.0;
+            }
+        } if(pose.state == 2){
+            if(distance <= 0.1){
+                data.linear.x = 0.0;
+                data.linear.y = 0.0;
+                data.linear.z = 0.0;
+                data.angular.x = 0.0;
+                data.angular.y = 0.0;
+                data.angular.z = 1.5;
+                pose.state++;
+            } else {
+                data.linear.x = 0.1;
+                data.linear.y = 0.0;
+                data.linear.z = 0.0;
+                data.angular.x = 0.0;
+                data.angular.y = 0.0;
+                data.angular.z = 0.0;
+            }
+        } if(pose.state == 3){
+            if(distance <= 0.1){
+                data.linear.x = 0.0;
+                data.linear.y = 0.0;
+                data.linear.z = 0.0;
+                data.angular.x = 0.0;
+                data.angular.y = 0.0;
+                data.angular.z = 1.5;
+                pose.state++;
+            } else {
+                data.linear.x = 0.1;
+                data.linear.y = 0.0;
+                data.linear.z = 0.0;
+                data.angular.x = 0.0;
+                data.angular.y = 0.0;
+                data.angular.z = 0.0;
+            }
+        }else{
             data.linear.x = 0.0;
             data.linear.y = 0.0;
             data.linear.z = 0.0;
             data.angular.x = 0.0;
             data.angular.y = 0.0;
             data.angular.z = 0.0;
-        } else {
-            data.linear.x = 0.1;
-            data.linear.y = 0.0;
-            data.linear.z = 0.0;
-            data.angular.x = 0.0;
-            data.angular.y = 0.0;
-            data.angular.z = 0.0;
-        }
-        return data;
+        } 
     }
 
     Demo::~Demo(){}

@@ -17,6 +17,7 @@ public:
         float position_x;
         float position_y;
         float orientation_z;
+        int state;
     }GoalPose;
 
     explicit Demo(const rclcpp::NodeOptions & options);
