@@ -20,7 +20,7 @@ public:
     }GoalPose;
 
     explicit Demo(const rclcpp::NodeOptions & options);
-    geometry_msgs::msg::Twist calcurate_velocity(float x, float y, GoalPose pose);
+    geometry_msgs::msg::Twist calcurate_velocity(float x, float y, GoalPose pose, float timeout);
     void callback(const geometry_msgs::msg::PoseStamped::SharedPtr data);
 
     virtual ~Demo();
