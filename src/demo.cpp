@@ -32,12 +32,22 @@ namespace nakanosima
         distance = std::sqrt(std::pow(x - pose.position_x, 2.0)+std::pow(y - pose.position_y, 2.0));
         RCLCPP_INFO(this->get_logger(), "distance : %f", distance);
         RCLCPP_INFO(this->get_logger(), "pose.position_x : %f", pose.position_x);
-        data.linear.x = 0.0;
-        data.linear.y = 0.0;
-        data.linear.z = 0.0;
-        data.angular.x = 0.0;
-        data.angular.y = 0.0;
-        data.angular.z = 0.0;
+
+        if(distance <= 1.0){
+            data.linear.x = 0.0;
+            data.linear.y = 0.0;
+            data.linear.z = 0.0;
+            data.angular.x = 0.0;
+            data.angular.y = 0.0;
+            data.angular.z = 0.0;
+        } else {
+            data.linear.x = 1.0;
+            data.linear.y = 0.0;
+            data.linear.z = 0.0;
+            data.angular.x = 0.0;
+            data.angular.y = 0.0;
+            data.angular.z = 0.0;
+        }
         return data;
     }
 
