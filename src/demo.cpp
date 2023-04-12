@@ -36,6 +36,12 @@ namespace nakanosima
         RCLCPP_INFO(this->get_logger(), "distance : %f", distance);
         RCLCPP_INFO(this->get_logger(), "pose.position_x : %f", pose.position_x);
         RCLCPP_INFO(this->get_logger(), "state : %d", pose.state);
+        data.linear.x = 0.0;
+        data.linear.y = 0.0;
+        data.linear.z = 0.0;
+        data.angular.x = 0.0;
+        data.angular.y = 0.0;
+        data.angular.z = 1.5;
         if(pose.state == 0){
             if(distance <= 0.1){
                 data.linear.x = 0.0;
