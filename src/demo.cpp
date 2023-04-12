@@ -42,83 +42,84 @@ namespace nakanosima
         data.angular.x = 0.0;
         data.angular.y = 0.0;
         data.angular.z = 0.0;
-        if(pose.state == 0){
-            if(distance <= 0.1){
-                data.linear.x = 0.0;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 1.5;
-                pose.state++;
-            } else {
-                data.linear.x = 0.2;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 0.0;
-            }
-        }
-        if(pose.state == 1){
-            if(distance <= 0.1){
-                data.linear.x = 0.0;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 1.5;
-                pose.state++;
-            } else {
-                data.linear.x = 0.2;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 0.0;
-            }
-        } if(pose.state == 2){
-            if(distance <= 0.1){
-                data.linear.x = 0.0;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 1.5;
-                pose.state++;
-            } else {
-                data.linear.x = 0.2;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 0.0;
-            }
-        } if(pose.state == 3){
-            if(distance <= 0.1){
-                data.linear.x = 0.0;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 1.5;
-                pose.state++;
-            } else {
-                data.linear.x = 0.2;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 0.0;
-            }
-        }else{
-            data.linear.x = 0.0;
-            data.linear.y = 0.0;
-            data.linear.z = 0.0;
-            data.angular.x = 0.0;
-            data.angular.y = 0.0;
-            data.angular.z = 0.0;
-        }
+        // if(pose.state == 0){
+        //     if(distance <= 0.1){
+        //         data.linear.x = 0.0;
+        //         data.linear.y = 0.0;
+        //         data.linear.z = 0.0;
+        //         data.angular.x = 0.0;
+        //         data.angular.y = 0.0;
+        //         data.angular.z = 1.5;
+        //         pose.state++;
+        //     } else {
+        //         data.linear.x = 0.2;
+        //         data.linear.y = 0.0;
+        //         data.linear.z = 0.0;
+        //         data.angular.x = 0.0;
+        //         data.angular.y = 0.0;
+        //         data.angular.z = 0.0;
+        //     }
+        // }
+        // if(pose.state == 1){
+        //     if(distance <= 0.1){
+        //         data.linear.x = 0.0;
+        //         data.linear.y = 0.0;
+        //         data.linear.z = 0.0;
+        //         data.angular.x = 0.0;
+        //         data.angular.y = 0.0;
+        //         data.angular.z = 1.5;
+        //         pose.state++;
+        //     } else {
+        //         data.linear.x = 0.2;
+        //         data.linear.y = 0.0;
+        //         data.linear.z = 0.0;
+        //         data.angular.x = 0.0;
+        //         data.angular.y = 0.0;
+        //         data.angular.z = 0.0;
+        //     }
+        // } if(pose.state == 2){
+        //     if(distance <= 0.1){
+        //         data.linear.x = 0.0;
+        //         data.linear.y = 0.0;
+        //         data.linear.z = 0.0;
+        //         data.angular.x = 0.0;
+        //         data.angular.y = 0.0;
+        //         data.angular.z = 1.5;
+        //         pose.state++;
+        //     } else {
+        //         data.linear.x = 0.2;
+        //         data.linear.y = 0.0;
+        //         data.linear.z = 0.0;
+        //         data.angular.x = 0.0;
+        //         data.angular.y = 0.0;
+        //         data.angular.z = 0.0;
+        //     }
+        // } if(pose.state == 3){
+        //     if(distance <= 0.1){
+        //         data.linear.x = 0.0;
+        //         data.linear.y = 0.0;
+        //         data.linear.z = 0.0;
+        //         data.angular.x = 0.0;
+        //         data.angular.y = 0.0;
+        //         data.angular.z = 1.5;
+        //         pose.state++;
+        //     } else {
+        //         data.linear.x = 0.2;
+        //         data.linear.y = 0.0;
+        //         data.linear.z = 0.0;
+        //         data.angular.x = 0.0;
+        //         data.angular.y = 0.0;
+        //         data.angular.z = 0.0;
+        //     }
+        // }else{
+        //     data.linear.x = 0.0;
+        //     data.linear.y = 0.0;
+        //     data.linear.z = 0.0;
+        //     data.angular.x = 0.0;
+        //     data.angular.y = 0.0;
+        //     data.angular.z = 0.0;
+        // }
+        RCLCPP_INFO(this->get_logger(),"data.linear.x : %f", data.linear.x);
         return data; 
     }
 
