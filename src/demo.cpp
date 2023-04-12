@@ -28,6 +28,12 @@ namespace nakanosima
         signal_pub_->publish(signal);
     }
 
+    void Demo::scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr data)
+    {
+        RCLCPP_INFO(this->get_logger(), "range_min : %f", data->range_min);
+        RCLCPP_INFO(this->get_logger(), "range_max : %f", data->range_max);
+    }
+
     geometry_msgs::msg::Twist Demo::calcurate_velocity(float x, float y, GoalPose pose, float timeout)
     {
         geometry_msgs::msg::Twist data;
