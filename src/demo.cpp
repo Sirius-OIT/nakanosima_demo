@@ -43,26 +43,19 @@ namespace nakanosima
         RCLCPP_INFO(this->get_logger(), "distance : %f", distance);
         RCLCPP_INFO(this->get_logger(), "pose.position_x : %f", pose.position_x);
         RCLCPP_INFO(this->get_logger(), "state : %d", pose.state);
-        // //debug-------------------------
-        // data.linear.x = 0.2;
-        // data.linear.y = 0.0;
-        // data.linear.z = 0.0;
-        // data.angular.x = 0.0;
-        // data.angular.y = 0.0;
-        // data.angular.z = 0.0;
-        // //-------------------------------
         if(pose.state == 0){
-            if(distance <= 0.1){
-                RCLCPP_INFO(this->get_logger(), "1");
+            if(distance <= 0.0){
                 data.linear.x = 0.0;
                 data.linear.y = 0.0;
                 data.linear.z = 0.0;
                 data.angular.x = 0.0;
                 data.angular.y = 0.0;
-                data.angular.z = 1.5;
-                pose.state++;
+                data.angular.z = 3.14;
+                pose.position_x = 0.0;
+                pose.position_y = 0.0;
+                pose.orientation_z = 0.0;
+                pose.state = 1;
             } else {
-                RCLCPP_INFO(this->get_logger(), "2");
                 data.linear.x = 0.2;
                 data.linear.y = 0.0;
                 data.linear.z = 0.0;
@@ -71,50 +64,18 @@ namespace nakanosima
                 data.angular.z = 0.0;
             }
         }else if(pose.state == 1){
-            if(distance <= 0.1){
+            if(distance <= 0.0){
                 data.linear.x = 0.0;
                 data.linear.y = 0.0;
                 data.linear.z = 0.0;
                 data.angular.x = 0.0;
                 data.angular.y = 0.0;
-                data.angular.z = 1.5;
-                pose.state++;
+                data.angular.z = 3.14;
+                pose.position_x = 2.0;
+                pose.position_y = 0.0;
+                pose.orientation_z = 0.0;
+                pose.state = 0;
             } else {
-                data.linear.x = 0.2;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 0.0;
-            }
-        } else if(pose.state == 2){
-            if(distance <= 0.1){
-                data.linear.x = 0.0;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 1.5;
-                pose.state++;
-            } else {
-                data.linear.x = 0.2;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 0.0;
-            }
-        } else if(pose.state == 3){
-            if(distance <= 0.1){
-                data.linear.x = 0.0;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 1.5;
-                pose.state++;
-            } else {
-                RCLCPP_INFO(this->get_logger(), "3");
                 data.linear.x = 0.2;
                 data.linear.y = 0.0;
                 data.linear.z = 0.0;
