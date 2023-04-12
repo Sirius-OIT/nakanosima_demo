@@ -33,6 +33,8 @@ namespace nakanosima
     {
         RCLCPP_INFO(this->get_logger(), "range_min : %f", data->range_min);
         RCLCPP_INFO(this->get_logger(), "range_max : %f", data->range_max);
+        RCLCPP_INFO(this->get_logger(), "range size : %d", data->ranges.size());
+        RCLCPP_INFO(this->get_logger(), "ranges[10]: %f", data->ranges[10]);
     }
 
     geometry_msgs::msg::Twist Demo::calcurate_velocity(float x, float y, GoalPose pose, float timeout)
