@@ -9,6 +9,7 @@ namespace nakanosima
         signal_pub_ = create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 1);
         using namespace std::chrono_literals;
         current_pose_subscription_ = create_subscription<geometry_msgs::msg::PoseStamped>("current_pose",10, std::bind(&Demo::callback, this, std::placeholders::_1));
+        scan_subscription_ = create_subscription<sensor_msgs::msg::LaserScan>("scan",10,std::bind(&Demo::scan_callback, this, std::placeholders::_1));
         pose.position_x = 2.0;
         pose.position_y = 0.0;
         pose.orientation_z = 0.0;
