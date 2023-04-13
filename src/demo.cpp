@@ -3,6 +3,8 @@
 
 namespace nakanosima
 {
+    int state = 0;
+    int flg = 0;
     Demo::Demo(const rclcpp::NodeOptions & options)
         : rclcpp::Node("demo", options)
     {
@@ -10,10 +12,10 @@ namespace nakanosima
         using namespace std::chrono_literals;
         current_pose_subscription_ = create_subscription<geometry_msgs::msg::PoseStamped>("current_pose",10, std::bind(&Demo::callback, this, std::placeholders::_1));
         scan_subscription_ = create_subscription<sensor_msgs::msg::LaserScan>("scan",10,std::bind(&Demo::scan_callback, this, std::placeholders::_1));
-        pose.position_x = 2.0;
-        pose.position_y = 0.0;
-        pose.orientation_z = 0.0;
-        pose.state = 0;
+        // pose.position_x = 2.0;
+        // pose.position_y = 0.0;
+        // pose.orientation_z = 0.0;
+        // pose.state = 0;
     }
 
     void Demo::callback(const geometry_msgs::msg::PoseStamped::SharedPtr data)
@@ -23,7 +25,7 @@ namespace nakanosima
         float x = data->pose.position.x;
         float y = data->pose.position.y;
         float timeout = 10.0;
-        geometry_msgs::msg::Twist signal = calcurate_velocity(x, y, pose, timeout);
+        geometry_msgs::msg::Twist signal = calcurate_velocity(x, y, pose, timeout, data);
         RCLCPP_INFO(this->get_logger(), "linear x : %f", signal.linear.x);
         RCLCPP_INFO(this->get_logger(), "linear y : %f", signal.linear.y);
         signal_pub_->publish(signal);
@@ -42,53 +44,80 @@ namespace nakanosima
 
     }
 
-    geometry_msgs::msg::Twist Demo::calcurate_velocity(float x, float y, GoalPose pose, float timeout)
+    geometry_msgs::msg::Twist Demo::calcurate_velocity(float x, float y, GoalPose pose, float timeout, const geometry_msgs::msg::PoseStamped::SharedPtr current_pose)
     {
         geometry_msgs::msg::Twist data;
         float distance;
         distance = std::sqrt(std::pow(x - pose.position_x, 2.0)+std::pow(y - pose.position_y, 2.0));
         RCLCPP_INFO(this->get_logger(), "distance : %f", distance);
+        RCLCPP_INFO(this->get_logger(), "current pose position x : %f", current_pose->pose.position.x);
         RCLCPP_INFO(this->get_logger(), "pose.position_x : %f", pose.position_x);
-        RCLCPP_INFO(this->get_logger(), "state : %d", pose.state);
-        if(pose.state == 0){
-            if(distance <= 0.0){
-                data.linear.x = 0.0;
+        RCLCPP_INFO(this->get_logger(), "state : %d", state);
+        RCLCPP_INFO(this->get_logger(), "flg : %d", flg);
+        RCLCPP_INFO(this->get_logger(), "timeout : %f", timeout);
+        if(state == 0){
+            if(current_pose->pose.position.x >= 2.0 || flg == 1){
+                if(current_pose->pose.orientation.z > 0.999 && current_pose->pose.orientation.z < 0.9999){
+                    state = 1;
+                    flg =0;
+                }else{
+                    data.linear.x = 0.0;
+                    data.linear.y = 0.0;
+                    data.linear.z = 0.0;
+                    data.angular.x = 0.0;
+                    data.angular.y = 0.0;
+                    data.angular.z = 0.5;
+                    pose.position_x = 0.0;
+                    pose.position_y = 0.0;
+                    pose.orientation_z = 0.0;
+                    flg = 1;
+                }    
+            } else if(flg == 0){
+                data.linear.x = 0.2;
                 data.linear.y = 0.0;
                 data.linear.z = 0.0;
                 data.angular.x = 0.0;
                 data.angular.y = 0.0;
-                data.angular.z = 3.14;
-                pose.position_x = 0.0;
-                pose.position_y = 0.0;
-                pose.orientation_z = 0.0;
-                pose.state = 1;
-            } else {
-                data.linear.x = 0.2;
+                data.angular.z = 0.0;
+            } else{
+                data.linear.x = 0.0;
                 data.linear.y = 0.0;
                 data.linear.z = 0.0;
                 data.angular.x = 0.0;
                 data.angular.y = 0.0;
                 data.angular.z = 0.0;
             }
-        }else if(pose.state == 1){
-            if(distance <= 0.0){
-                data.linear.x = 0.0;
-                data.linear.y = 0.0;
-                data.linear.z = 0.0;
-                data.angular.x = 0.0;
-                data.angular.y = 0.0;
-                data.angular.z = 3.14;
-                pose.position_x = 2.0;
-                pose.position_y = 0.0;
-                pose.orientation_z = 0.0;
-                pose.state = 0;
-            } else {
+        }else if(state == 1){
+            if(current_pose->pose.position.x <= 0.0 || flg == 1){
+                if(current_pose->pose.orientation.z > 0.00 && current_pose->pose.orientation.z < 0.01){
+                    state = 0;
+                    flg = 0;
+                }else{
+                    data.linear.x = 0.0;
+                    data.linear.y = 0.0;
+                    data.linear.z = 0.0;
+                    data.angular.x = 0.0;
+                    data.angular.y = 0.0;
+                    data.angular.z = 0.5;
+                    pose.position_x = 0.0;
+                    pose.position_y = 0.0;
+                    pose.orientation_z = 0.0;
+                    flg = 1;
+                } 
+            } else if(flg == 0){
                 data.linear.x = 0.2;
                 data.linear.y = 0.0;
                 data.linear.z = 0.0;
                 data.angular.x = 0.0;
                 data.angular.y = 0.0;
                 data.angular.z = 0.0;
+            }else{
+            data.linear.x = 0.0;
+            data.linear.y = 0.0;
+            data.linear.z = 0.0;
+            data.angular.x = 0.0;
+            data.angular.y = 0.0;
+            data.angular.z = 0.0;
             }
         }else{
             data.linear.x = 0.0;

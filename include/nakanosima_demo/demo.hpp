@@ -15,14 +15,14 @@ class Demo : public rclcpp::Node
 public:
     typedef struct
     {
-        float position_x;
-        float position_y;
-        float orientation_z;
-        int state;
+        float position_x=2.0;
+        float position_y=0.0;
+        float orientation_z=0.0;
+        int state=0;
     }GoalPose;
 
     explicit Demo(const rclcpp::NodeOptions & options);
-    geometry_msgs::msg::Twist calcurate_velocity(float x, float y, GoalPose pose, float timeout);
+    geometry_msgs::msg::Twist calcurate_velocity(float x, float y, GoalPose pose, float timeout, const geometry_msgs::msg::PoseStamped::SharedPtr current_pose);
     void callback(const geometry_msgs::msg::PoseStamped::SharedPtr data);
     void scan_callback(const sensor_msgs::msg::LaserScan::SharedPtr data);
 
